@@ -58,7 +58,6 @@ impl<const WIDTH: u32, const HEIGHT: u32> State<WIDTH, HEIGHT> {
             // TODO: Bit-based row mask discovery for non-power-of-two widths.
             let row_mask = Self::ROW_MASK << (i / WIDTH - 1) * WIDTH;
 
-            // TODO: Fork bit-iter and provide it from there.
             let diagonals = bit >> WIDTH - 1 | bit >> WIDTH + 1;
             let forward = bit >> WIDTH & !self.me;
 
@@ -109,4 +108,7 @@ mod tests {
     fn perft_4() {
         assert_eq!(perft(State::<4, 16>::default(), 4), 12100);
     }
+
+    // TODO: Perft 5.
+    // TODO: Combat perft.
 }
