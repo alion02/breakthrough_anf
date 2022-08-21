@@ -1,0 +1,10 @@
+[package]
+name = "breakthrough_anf"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+normform = "0.1"
+bit-iter = { git = "https://github.com/alion02/bit-iter", branch = "bitmask" }
