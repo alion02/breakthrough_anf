@@ -75,38 +75,38 @@ impl<const WIDTH: u32, const HEIGHT: u32> State<WIDTH, HEIGHT> {
     pub fn is_lost(self) -> bool {
         self.them & Self::ROW_MASK != 0
     }
+
+    pub fn perft(self, depth: u32) -> u64 {
+        if depth == 0 {
+            1
+        } else {
+            self.children().map(|state| state.perft(depth - 1)).sum()
+        }
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn perft<const WIDTH: u32, const HEIGHT: u32>(state: State<WIDTH, HEIGHT>, depth: u32) -> u64 {
-        if depth == 0 {
-            1
-        } else {
-            state.children().map(|state| perft(state, depth - 1)).sum()
-        }
-    }
-
     #[test]
     fn perft_1() {
-        assert_eq!(perft(State::<4, 16>::default(), 1), 10);
+        assert_eq!(State::<4, 16>::default().perft(1), 10);
     }
 
     #[test]
     fn perft_2() {
-        assert_eq!(perft(State::<4, 16>::default(), 2), 100);
+        assert_eq!(State::<4, 16>::default().perft(2), 100);
     }
 
     #[test]
     fn perft_3() {
-        assert_eq!(perft(State::<4, 16>::default(), 3), 1100);
+        assert_eq!(State::<4, 16>::default().perft(3), 1100);
     }
 
     #[test]
     fn perft_4() {
-        assert_eq!(perft(State::<4, 16>::default(), 4), 12100);
+        assert_eq!(State::<4, 16>::default().perft(4), 12100);
     }
 
     // TODO: Perft 5.
